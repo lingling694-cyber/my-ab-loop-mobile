@@ -1,4 +1,4 @@
-const CACHE = 'ab-loop-shell-v0.1.0-r3';
+const CACHE = 'ab-loop-shell-v0.1.0-r5';
 const FILES = ['./','./index.html','./style.css','./manifest.json','./icon.svg',
  './src/constants.js','./src/media-state.js','./src/media-resource.js','./src/media-transport.js','./src/region.js','./src/loop-engine.js','./src/practice-session.js','./src/player-core.js','./src/ui.js','./src/pwa.js',
  './tests/index.html','./tests/observer.js','./tests/test-runner.js','./tests/test-cases.js','./tests/report.js','./tests/panel.js'];

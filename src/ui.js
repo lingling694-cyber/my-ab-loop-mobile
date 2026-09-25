@@ -29,5 +29,11 @@ setInterval(()=>{
  $('debug').textContent=JSON.stringify({...latest,transitionGuard:['positioning','returning'].includes(latest.phase)},null,2);
 },CONFIG.uiIntervalSeconds*1000);
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&core.video)core.pause();});
-window.addEventListener('pagehide',()=>core.dispose());
+// Preserve the live File, object URL and practice state when entering page cache.
+// WebKit: https://webkit.org/blog/516/webkit-page-cache-ii-the-unload-event/
+window.addEventListener('pagehide',event=>{
+ if(event.persisted){ if(core.video)core.pause(); }
+ else core.dispose();
+});
+window.addEventListener('pageshow',event=>{if(event.persisted)dirty=true;});
 void registerPwa($('pwa-status'));

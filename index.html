@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#123748"><meta name="description" content="本地视频 A-B 循环能力验证"><link rel="manifest" href="./manifest.json"><link rel="icon" href="./icon.svg" type="image/svg+xml">
-<title>My AB Loop · v0.1 实验核心</title><link rel="stylesheet" href="./style.css"></head>
+<title>My AB Loop · A–B 练习</title><link rel="stylesheet" href="./style.css"></head>
 <body><main>
-<header><p>MY AB LOOP / v0.1</p><h1>本地视频 · A–B 练习</h1><p>工程验证版 · 视频只在本机播放，不上传</p></header>
-<section><h2>1. 选择与播放</h2><label>本地视频<input id="file" type="file" accept="video/*"></label><p id="file-name">尚未选择视频</p><div id="video-mount"></div>
+<header><h1>A–B 视频练习</h1><p>选择视频，反复练习。视频留在本机，不上传。</p></header>
+<section><h2>选择与播放</h2><label>本地视频<input id="file" type="file" accept="video/*"></label><p id="file-name">尚未选择视频</p><div id="video-mount"></div>
 <div class="row"><button id="play">播放 / 继续</button><button id="pause">暂停</button></div>
 <p id="position">0.000 / — 秒</p><div class="row"><label>跳转位置（秒）<input id="seek-time" type="number" min="0" step="0.001" value="0"></label><button id="seek">跳转（中止循环）</button></div>
 <label>播放倍速<input id="rate" type="range" min="0.25" max="2" step="0.05" value="1"></label><output id="rate-value">1.00×</output></section>
-<section><h2>2. Region 与循环</h2><p>修改 A/B 或手动跳转会中止当前循环并重置次数。倍速变化不修改 A/B。</p>
+<section><h2>A–B 循环</h2><p>修改 A/B 或手动跳转会中止当前循环并重置次数。倍速变化不修改 A/B。</p>
 <div class="row"><label>A（秒）<input id="a" type="number" min="0" step="0.001" placeholder="未设置"></label><button id="set-a">将当前位置设为 A</button></div>
 <div class="row"><label>B（秒）<input id="b" type="number" min="0" step="0.001" placeholder="未设置"></label><button id="set-b">将当前位置设为 B</button></div>
 <div class="row"><label>循环模式<select id="mode"><option value="finite">有限次数</option><option value="infinite">连续 / 无限</option></select></label>
@@ -16,11 +16,14 @@
 <div class="row"><button id="enable">启用循环并从 A 播放</button><button id="disable">关闭循环</button></div>
 <p id="loop-status">disabled · 已完成 0 次</p><p>50 次 = 完整播放 A→B 共 50 次，第一次也计入。</p></section>
 <p id="error" role="status" aria-live="polite"></p>
-<section><h2>3. 独立验证</h2><p>时间精度只测量，不设定通过容差。测试需要已加载的视频；矩阵需要至少 14 秒。</p>
+<details id="advanced"><summary>高级 · 测试与调试</summary>
+<section><h2>独立验证</h2><p>时间精度只测量，不设定通过容差。测试需要已加载的视频；矩阵需要至少 14 秒。</p>
 <label>测试用例<select id="test-case"></select></label><div class="row"><label>设备与系统版本<input id="device" placeholder="例如 iPhone 16 Pro Max / iOS 版本"></label><label>测试媒体说明<input id="fixture" placeholder="编码、帧率、文件大小或测试片编号"></label></div>
 <label>替换测试使用的第二个视频<input id="replacement" type="file" accept="video/*"></label>
 <div class="row"><button id="run-test">运行所选测试</button><button id="stop-test">停止并报告</button><button id="export" disabled>导出原始报告 JSON</button></div>
 <p id="test-status">尚未运行 · DEVICE / PWA 未验证</p><pre id="report">没有测试报告。</pre></section>
 <details><summary>工程调试状态（不是测试结论）</summary><pre id="debug"></pre></details>
-<footer><p id="pwa-status">正在检查离线缓存…</p><p>前台运行实验。锁屏或切换应用会暂停播放；返回后手动继续。重新打开应用后需重新选择视频。</p><a href="./tests/index.html">测试说明</a></footer>
+<p id="pwa-status">正在检查离线缓存…</p><a href="./tests/index.html">测试说明</a>
+</details>
+<footer><p>锁屏后返回，点击“播放 / 继续”。页面未重新加载时保留视频和 A/B；刷新或系统重新加载后需重新选择并设置。</p></footer>
 </main><script type="module" src="./src/ui.js"></script><script type="module" src="./tests/panel.js"></script></body></html>

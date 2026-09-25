@@ -1,9 +1,11 @@
 import { PlayerCore } from './player-core.js';
 import { CONFIG } from './constants.js';
 import { registerPwa } from './pwa.js';
+import { setupPresentation } from './presentation.js';
 const $ = id => document.getElementById(id);
 Object.assign($('rate'), { min: CONFIG.minRate, max: CONFIG.maxRate, step: CONFIG.rateStep, value: CONFIG.initialRate });
 export const core = new PlayerCore($('video-mount'));
+setupPresentation(core);
 let latest, dirty = true, displayedMode, displayedTarget;
 core.subscribe(state => { latest = state; dirty = true; });
 $('file').addEventListener('change',()=>{ core.load($('file').files[0]); $('file').value=''; });
@@ -28,7 +30,7 @@ setInterval(()=>{
  $('error').textContent=latest.error??'';
  $('debug').textContent=JSON.stringify({...latest,transitionGuard:['positioning','returning'].includes(latest.phase)},null,2);
 },CONFIG.uiIntervalSeconds*1000);
-document.addEventListener('visibilitychange',()=>{if(document.hidden&&core.video)core.pause();});
+// Visibility policy is owned by the display controller, which reads native PiP state.
 // Preserve the live File, object URL and practice state when entering page cache.
 // WebKit: https://webkit.org/blog/516/webkit-page-cache-ii-the-unload-event/
 window.addEventListener('pagehide',event=>{

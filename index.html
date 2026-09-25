@@ -4,7 +4,9 @@
 <title>My AB Loop · A–B 练习</title><link rel="stylesheet" href="./style.css"></head>
 <body><main>
 <header><h1>A–B 视频练习</h1><p>选择视频，反复练习。视频留在本机，不上传。</p></header>
-<section><h2>选择与播放</h2><label>本地视频<input id="file" type="file" accept="video/*"></label><p id="file-name">尚未选择视频</p><div id="video-mount"></div>
+<section><h2>选择与播放</h2><label>本地视频<input id="file" type="file" accept="video/*"></label><p id="file-name">尚未选择视频</p><div id="video-panel"><div id="video-mount"></div>
+<div class="row"><button id="expand-video" disabled aria-pressed="false">放大 / 悬浮</button><button id="pip-video" disabled aria-pressed="false">画中画</button></div>
+<p id="presentation-status" role="status" aria-live="polite">选择视频后可放大或开启画中画。</p></div>
 <div class="row"><button id="play">播放 / 继续</button><button id="pause">暂停</button></div>
 <p id="position">0.000 / — 秒</p><div class="row"><label>跳转位置（秒）<input id="seek-time" type="number" min="0" step="0.001" value="0"></label><button id="seek">跳转（中止循环）</button></div>
 <label>播放倍速<input id="rate" type="range" min="0.25" max="2" step="0.05" value="1"></label><output id="rate-value">1.00×</output></section>
@@ -25,5 +27,5 @@
 <details><summary>工程调试状态（不是测试结论）</summary><pre id="debug"></pre></details>
 <p id="pwa-status">正在检查离线缓存…</p><a href="./tests/index.html">测试说明</a>
 </details>
-<footer><p>锁屏后返回，点击“播放 / 继续”。页面未重新加载时保留视频和 A/B；刷新或系统重新加载后需重新选择并设置。</p></footer>
+<footer><p>普通模式锁屏后返回，点击“播放 / 继续”。页面未重新加载时保留视频和 A/B；刷新或系统重新加载后需重新选择并设置。</p></footer>
 </main><script type="module" src="./src/ui.js"></script><script type="module" src="./tests/panel.js"></script></body></html>
